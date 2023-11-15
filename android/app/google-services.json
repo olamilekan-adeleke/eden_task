@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "552810675673",
+    "project_id": "eden-task-fae2a",
+    "storage_bucket": "eden-task-fae2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552810675673:android:c0b71df21213bb8bfc2dc8",
+        "android_client_info": {
+          "package_name": "com.example.eden_task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552810675673-ukuiq6q52nn5a88e2uoodandq61e7sii.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhSZgo_noKdsatNELvENaMZCGSFnvZPjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552810675673-ukuiq6q52nn5a88e2uoodandq61e7sii.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
