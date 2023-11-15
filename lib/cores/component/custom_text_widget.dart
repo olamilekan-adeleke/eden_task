@@ -9,7 +9,7 @@ class TextWidget extends StatelessWidget {
   const TextWidget(
     this.text, {
     Key? key,
-    this.fontSize = kfsMedium,
+    this.size = kfsMedium,
     this.textColor = AppColor.textPrimary,
     this.fontWeight = FontWeight.w400,
     this.textAlign = TextAlign.left,
@@ -23,7 +23,7 @@ class TextWidget extends StatelessWidget {
   const TextWidget.bold(
     this.text, {
     Key? key,
-    this.fontSize = kfsMedium,
+    this.size = kfsMedium,
     this.textColor = AppColor.textPrimary,
     this.textAlign = TextAlign.left,
     this.maxLines,
@@ -34,8 +34,36 @@ class TextWidget extends StatelessWidget {
   })  : fontWeight = FontWeight.w700,
         super(key: key);
 
+  const TextWidget.semibold(
+    this.text, {
+    Key? key,
+    this.size = kfsMedium,
+    this.textColor = AppColor.textPrimary,
+    this.textAlign = TextAlign.left,
+    this.maxLines,
+    this.overflow,
+    this.decoration,
+    this.height = 1,
+    this.withOpacity,
+  })  : fontWeight = FontWeight.w500,
+        super(key: key);
+
+  const TextWidget.light(
+    this.text, {
+    Key? key,
+    this.size = kfsMedium,
+    this.textColor = AppColor.textPrimary,
+    this.textAlign = TextAlign.left,
+    this.maxLines,
+    this.overflow,
+    this.decoration,
+    this.height = 1,
+    this.withOpacity,
+  })  : fontWeight = FontWeight.w300,
+        super(key: key);
+
   final String text;
-  final double fontSize;
+  final double size;
   final Color textColor;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
@@ -50,7 +78,7 @@ class TextWidget extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.inter(
-        fontSize: sp(fontSize),
+        fontSize: sp(size),
         color: textColor.withOpacity(withOpacity ?? 1.0),
         fontWeight: fontWeight,
         decoration: decoration,

@@ -35,33 +35,31 @@ class ScaffoldWidget extends StatelessWidget {
       horizontal: usePadding ? sp(kGlobalPadding) : 0,
     );
 
-    return SizedBox(
-      height: sh(100),
-      child: Scaffold(
-        drawerEnableOpenDragGesture: true,
-        key: scaffoldKey,
-        appBar: appBar,
-        backgroundColor: bg ?? Theme.of(context).scaffoldBackgroundColor,
-        body: SafeArea(
-          child: SizedBox(
-            height: sh(98),
-            child: () {
-              if (useSingleScroll) {
-                return SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  controller: scrollController,
-                  child: Padding(padding: edgeInsets, child: body),
-                );
-              } else {
-                return Padding(padding: edgeInsets, child: body);
-              }
-            }(),
-          ),
+    return Scaffold(
+      drawerEnableOpenDragGesture: true,
+      key: scaffoldKey,
+      appBar: appBar,
+      backgroundColor: bg ?? Theme.of(context).scaffoldBackgroundColor,
+      body: SafeArea(
+        
+        child: SizedBox(
+          height: sh(100),
+          child: () {
+            if (useSingleScroll) {
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                controller: scrollController,
+                child: Padding(padding: edgeInsets, child: body),
+              );
+            } else {
+              return Padding(padding: edgeInsets, child: body);
+            }
+          }(),
         ),
-        drawer: drawer,
-        bottomNavigationBar: bottomNavigationBar,
-        floatingActionButton: floatingActionButton,
       ),
+      drawer: drawer,
+      bottomNavigationBar: bottomNavigationBar,
+      floatingActionButton: floatingActionButton,
     );
   }
 }

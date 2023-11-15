@@ -9,7 +9,7 @@ Route<dynamic> errorRoute() {
       return Scaffold(
         appBar: AppBar(title: const TextWidget('Page Not Found')),
         body: const Center(
-          child: TextWidget('ERROR: Route not found', fontSize: kfsExtraLarge),
+          child: TextWidget('ERROR: Route not found', size: kfsExtraLarge),
         ),
       );
     },
@@ -20,7 +20,7 @@ Widget noPage() {
   return Scaffold(
     appBar: AppBar(title: const TextWidget('Page Not Done')),
     body: const Center(
-      child: TextWidget('Page Still In Production', fontSize: kfsExtraLarge),
+      child: TextWidget('Page Still In Production', size: kfsExtraLarge),
     ),
   );
 }

@@ -14,3 +14,12 @@ double sr(double value) => value.r;
 /// return a percentage of the screen height or width in respect to the  value given
 double sh(double value) => (value / 100).sh;
 double sw(double value) => (value / 100).sw;
+
+// padding
+EdgeInsetsGeometry paddingAll([double value = 10]) => EdgeInsets.all(value.sp);
+EdgeInsetsGeometry symmetricPadding({num horizontal = 0, num vertical = 0}) {
+  return EdgeInsets.symmetric(
+    horizontal: w(horizontal.toDouble()),
+    vertical: h(vertical.toDouble()),
+  );
+}
