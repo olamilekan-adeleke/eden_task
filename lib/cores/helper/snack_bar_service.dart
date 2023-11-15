@@ -28,7 +28,9 @@ class SnackBarService {
         content: Row(children: [
           const Icon(Icons.error, color: AppColor.errorColor),
           horizontalSpace(),
-          TextWidget(message, textColor: AppColor.white),
+          Flexible(
+            child: TextWidget(message, textColor: AppColor.white, maxLines: 2),
+          ),
         ]),
       ),
     );
@@ -51,7 +53,9 @@ class SnackBarService {
         content: Row(children: [
           const Icon(Icons.check_circle, color: AppColor.successColor),
           horizontalSpace(),
-          TextWidget(message, textColor: AppColor.white),
+          Flexible(
+            child: TextWidget(message, textColor: AppColor.white, maxLines: 2),
+          ),
         ]),
       ),
     );
@@ -74,7 +78,9 @@ class SnackBarService {
         content: Row(children: [
           const Icon(Icons.warning, color: AppColor.greyBackground),
           horizontalSpace(),
-          TextWidget(message, textColor: AppColor.white),
+          Flexible(
+            child: TextWidget(message, textColor: AppColor.white, maxLines: 2),
+          ),
         ]),
       ),
     );
