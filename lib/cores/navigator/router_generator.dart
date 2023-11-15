@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/auth/presentation/pages/login_view.dart';
 import 'error_route_screen.dart';
 
 class RouteGenerator {
@@ -10,8 +11,8 @@ class RouteGenerator {
     final Object? args = settings.arguments;
 
     switch (settings.name) {
-      // case IntroScreen.routeName:
-      //   return pageRoute(const IntroScreen());
+      case LoginView.routeName:
+        return pageRoute(const LoginView());
 
       default:
         return errorRoute();

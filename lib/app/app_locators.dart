@@ -8,7 +8,7 @@ class AppLocator {
   const AppLocator._();
   factory AppLocator() => _instance;
 
-  void setup() {
+  static void setup() {
     setUpAuthLocator();
   }
 }
