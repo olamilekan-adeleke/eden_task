@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../cores/component/custom_scaffold_widget.dart';
+
 class LoginView extends StatelessWidget {
   static const String routeName = '/login';
 
@@ -7,6 +9,14 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ScaffoldWidget(
+      usePadding: false,
+      useSingleScroll: false,
+      body: Column(
+        children: const [
+          
+        ],
+      ),
+    );
   }
 }
