@@ -1,3 +1,5 @@
+import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../app/app_locators.dart';
 import 'data/datasources/auth_remote_data_source.dart';
 import 'data/repositories/auth_repo_impl.dart';
@@ -9,7 +11,7 @@ import 'presentation/bloc/login_with_social/login_with_social_bloc.dart';
 void setUpAuthLocator() {
   // remote data source
   getIt.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(),
+    () => AuthRemoteDataSourceImpl(googleSignIn: GoogleSignIn()),
   );
 
   // repository
