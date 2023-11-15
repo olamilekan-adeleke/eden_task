@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 
+import '../../../../cores/base_request_body/base_request_body.dart';
 import '../../../../cores/exception/base_exception.dart';
 import '../../../../cores/try_catch_helper/try_catch_helper.dart';
 import '../../domain/entities/auth_entity.dart';
@@ -12,8 +13,8 @@ class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failures, AuthEntity>> loginWithGithub() {
-    final action = remoteDataSource.loginWithGithub();
+  Future<Either<Failures, AuthEntity>> loginWithGithub(RequestParam param) {
+    final action = remoteDataSource.loginWithGithub(param);
     final tryCatchHandler = RepoTryCatchHelper<AuthEntity>();
 
     return tryCatchHandler.tryAction(() => action);

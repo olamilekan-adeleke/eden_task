@@ -1,13 +1,16 @@
-import '../../../../cores/try_catch_helper/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:github_sign_in_plus/github_sign_in_plus.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../../cores/base_request_body/base_request_body.dart';
+import '../../../../cores/try_catch_helper/logger.dart';
+import '../../presentation/bloc/login_with_social/login_with_social_bloc.dart';
 import '../models/auth_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<AuthModel> loginWithGoogle();
 
-  Future<AuthModel> loginWithGithub();
+  Future<AuthModel> loginWithGithub(RequestParam param);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -16,8 +19,27 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl({required this.googleSignIn});
 
   @override
-  Future<AuthModel> loginWithGithub() async {
-// await
+  Future<AuthModel> loginWithGithub(RequestParam param) async {
+    final loginWithGithubParam = param as LoginWithGithubParam;
+    final GitHubSignIn gitHubSignIn = GitHubSignIn(
+      clientId: "730bff61ff74a84d2d22",
+      clientSecret: "01ca0ae9697d1be72be8d12cd4ec7db7b29e6bee",
+      redirectUrl: "https://github.com/olamilekan-adeleke",
+    );
+
+    final context = loginWithGithubParam.context;
+    final GitHubSignInResult result = await gitHubSignIn.signIn(context);
+
+    if (result.status != GitHubSignInResultStatus.ok) {
+      final githubAuthCredential = GithubAuthProvider.credential(result.token!);
+      final UserCredential userData = await FirebaseAuth.instance
+          .signInWithCredential(githubAuthCredential);
+
+      LoggerHelper.log(userData.toString());
+    } else {
+      throw Exception("Github login failed");
+    }
+
     throw UnimplementedError();
   }
 

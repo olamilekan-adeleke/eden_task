@@ -52,7 +52,7 @@ class LoginFormWidget extends StatelessWidget {
                 },
                 child: isLoading
                     ? const Center(child: LoadingIndicatorWidget())
-                    : buildButtonWidget(),
+                    : buildButtonWidget(context),
               );
             },
           ),
@@ -71,7 +71,7 @@ class LoginFormWidget extends StatelessWidget {
 }
 
 extension on LoginFormWidget {
-  Widget buildButtonWidget() {
+  Widget buildButtonWidget(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -82,7 +82,9 @@ extension on LoginFormWidget {
         buildOrDividerOption(),
         buildSocialButton("gitHub.png", "Login with GitHub", onTap: () {
           final loginWithSocialBloc = getIt<LoginWithSocialBloc>();
-          loginWithSocialBloc.add(LoginWithGithub());
+          loginWithSocialBloc.add(
+            LoginWithGithub(LoginWithGithubParam(context: context)),
+          );
         }),
       ],
     );

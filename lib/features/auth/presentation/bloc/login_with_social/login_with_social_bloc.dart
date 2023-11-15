@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/widgets.dart';
 
+import '../../../../../cores/base_request_body/base_request_body.dart';
 import '../../../../../cores/usecase/params.dart';
 import '../../../domain/entities/auth_entity.dart';
 import '../../../domain/usecases/login_with_github_usecase.dart';
@@ -34,12 +36,29 @@ class LoginWithSocialBloc
     on<LoginWithGithub>((event, emit) async {
       emit(LoginWithSocialLoading());
 
-      final result = await loginWithGithubUsecase.call(const NoParams());
+      final result = await loginWithGithubUsecase.call(event.param);
 
       result.fold(
         (failure) => emit(LoginWithSocialError(failure.message)),
         (auth) => emit(LoginWithSocialSuccess(auth)),
       );
     });
+  }
+}
+
+class LoginWithGithubParam implements RequestParam {
+  final BuildContext context;
+
+  const LoginWithGithubParam({required this.context});
+
+  @override
+  List<Object?> get props => [context];
+
+  @override
+  bool? get stringify => true;
+
+  @override
+  Map<String, dynamic> toMap() {
+    throw UnimplementedError();
   }
 }

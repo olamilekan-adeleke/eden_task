@@ -9,4 +9,8 @@ abstract class LoginWithSocialEvent extends Equatable {
 
 class LoginWithGoogle extends LoginWithSocialEvent {}
 
-class LoginWithGithub extends LoginWithSocialEvent {}
+class LoginWithGithub extends LoginWithSocialEvent {
+  final LoginWithGithubParam param;
+
+  const LoginWithGithub(this.param);
+}
