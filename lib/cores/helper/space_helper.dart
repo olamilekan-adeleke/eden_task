@@ -23,3 +23,12 @@ EdgeInsetsGeometry symmetricPadding({num horizontal = 0, num vertical = 0}) {
     vertical: h(vertical.toDouble()),
   );
 }
+
+EdgeInsetsGeometry paddingOnly({
+  double left = 0.0,
+  double top = 0.0,
+  double right = 0.0,
+  double bottom = 0.0,
+}) {
+  return EdgeInsets.only(left: left, top: top, right: right, bottom: bottom);
+}

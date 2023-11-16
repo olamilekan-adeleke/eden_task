@@ -30,17 +30,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final context = loginWithGithubParam.context;
     final GitHubSignInResult result = await gitHubSignIn.signIn(context);
 
-    if (result.status != GitHubSignInResultStatus.ok) {
+    if (result.status == GitHubSignInResultStatus.ok) {
       final githubAuthCredential = GithubAuthProvider.credential(result.token!);
       final UserCredential userData = await FirebaseAuth.instance
           .signInWithCredential(githubAuthCredential);
 
       LoggerHelper.log(userData.toString());
+      final data = UserDetailsModel(
+        fullName: userData.user?.displayName ?? "",
+        email: userData.user?.email ?? "",
+        profilePicUrl: userData.user?.photoURL ?? "",
+      );
+
+      return AuthModel(message: "Login successful", success: true, data: data);
     } else {
       throw Exception("Github login failed");
     }
-
-    throw UnimplementedError();
   }
 
   @override
@@ -58,7 +63,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         await FirebaseAuth.instance.signInWithCredential(credential);
 
     LoggerHelper.log(userData.toString());
-    throw UnimplementedError();
+    final data = UserDetailsModel(
+      fullName: userData.user?.displayName ?? "",
+      email: userData.user?.email ?? "",
+      profilePicUrl: userData.user?.photoURL ?? "",
+    );
+
+    return AuthModel(message: "Login successful", success: true, data: data);
   }
 }
 

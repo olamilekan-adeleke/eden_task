@@ -1,9 +1,11 @@
+import 'package:eden_task/cores/navigator/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/app_locators.dart';
 import '../../../../cores/component/image_widget.dart';
 import '../../../../cores/helper/snack_bar_service.dart';
+import '../../../order/presentation/pages/order_home_view.dart';
 import '../bloc/login_with_social/login_with_social_bloc.dart';
 import '../widgets/login_form_widget.dart';
 
@@ -51,7 +53,10 @@ extension on _LoginViewState {
     if (state is LoginWithSocialSuccess) {
       SnackBarService.showSuccessSnackBar(context, message: state.data.message);
 
-      // Navigator.pushNamed(context, HomeView.routeName);
+      AppRouter.instance.navigateTo(
+        OrderHomeView.routeName,
+        arguments: state.data.data,
+      );
     } else if (state is LoginWithSocialError) {
       SnackBarService.showErrorSnackBar(context, message: state.message);
     }

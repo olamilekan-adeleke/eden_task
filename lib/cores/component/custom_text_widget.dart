@@ -10,7 +10,7 @@ class TextWidget extends StatelessWidget {
     this.text, {
     Key? key,
     this.size = kfsMedium,
-    this.textColor = AppColor.textPrimary,
+    this.color = AppColor.textPrimary,
     this.fontWeight = FontWeight.w400,
     this.textAlign = TextAlign.left,
     this.maxLines,
@@ -24,7 +24,7 @@ class TextWidget extends StatelessWidget {
     this.text, {
     Key? key,
     this.size = kfsMedium,
-    this.textColor = AppColor.textPrimary,
+    this.color = AppColor.textPrimary,
     this.textAlign = TextAlign.left,
     this.maxLines,
     this.overflow,
@@ -38,7 +38,7 @@ class TextWidget extends StatelessWidget {
     this.text, {
     Key? key,
     this.size = kfsMedium,
-    this.textColor = AppColor.textPrimary,
+    this.color = AppColor.textPrimary,
     this.textAlign = TextAlign.left,
     this.maxLines,
     this.overflow,
@@ -52,7 +52,7 @@ class TextWidget extends StatelessWidget {
     this.text, {
     Key? key,
     this.size = kfsMedium,
-    this.textColor = AppColor.textPrimary,
+    this.color = AppColor.textPrimary,
     this.textAlign = TextAlign.left,
     this.maxLines,
     this.overflow,
@@ -64,7 +64,7 @@ class TextWidget extends StatelessWidget {
 
   final String text;
   final double size;
-  final Color textColor;
+  final Color color;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
   final int? maxLines;
@@ -79,10 +79,10 @@ class TextWidget extends StatelessWidget {
       text,
       style: GoogleFonts.inter(
         fontSize: sp(size),
-        color: textColor.withOpacity(withOpacity ?? 1.0),
+        color: color.withOpacity(withOpacity ?? 1.0),
         fontWeight: fontWeight,
         decoration: decoration,
-        decorationColor: textColor.withOpacity(withOpacity ?? 1.0),
+        decorationColor: color.withOpacity(withOpacity ?? 1.0),
         height: height,
       ),
       textAlign: textAlign,

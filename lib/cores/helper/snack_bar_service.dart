@@ -29,7 +29,7 @@ class SnackBarService {
           const Icon(Icons.error, color: AppColor.errorColor),
           horizontalSpace(),
           Flexible(
-            child: TextWidget(message, textColor: AppColor.white, maxLines: 2),
+            child: TextWidget(message, color: AppColor.white, maxLines: 2),
           ),
         ]),
       ),
@@ -54,7 +54,7 @@ class SnackBarService {
           const Icon(Icons.check_circle, color: AppColor.successColor),
           horizontalSpace(),
           Flexible(
-            child: TextWidget(message, textColor: AppColor.white, maxLines: 2),
+            child: TextWidget(message, color: AppColor.white, maxLines: 2),
           ),
         ]),
       ),
@@ -79,7 +79,7 @@ class SnackBarService {
           const Icon(Icons.warning, color: AppColor.greyBackground),
           horizontalSpace(),
           Flexible(
-            child: TextWidget(message, textColor: AppColor.white, maxLines: 2),
+            child: TextWidget(message, color: AppColor.white, maxLines: 2),
           ),
         ]),
       ),
