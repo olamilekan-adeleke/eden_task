@@ -36,7 +36,6 @@ class _OrderHomeViewState extends State<OrderHomeView> {
       body: Column(children: [
         verticalSpace(),
         OrderViewHeaderWidget(widget.userData),
-        SizedBox(height: h(100), child: const Placeholder()),
         BlocBuilder<GetChannelMessagesBloc, GetChannelMessagesState>(
           bloc: _getChannelMessageBloc,
           builder: (context, state) {

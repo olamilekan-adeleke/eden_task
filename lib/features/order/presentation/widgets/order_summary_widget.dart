@@ -18,9 +18,6 @@ class OrderSummaryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      verticalSpace(40),
-      const TextWidget.bold("Your Orders", size: kfsLarge),
-      verticalSpace(15),
       _OrderItemWidget(orderStatus),
     ]);
   }
@@ -81,7 +78,7 @@ class _OrderItemWidget extends StatelessWidget {
       horizontalSpace(sw(100)),
       verticalSpace(),
       // Stepper
-      SizedBox(height: h(20), child: const Placeholder()),
+      // SizedBox(height: h(20), child: const Placeholder()),
       verticalSpace(),
       GestureDetector(
         onTap: () => AppRouter.instance.navigateTo(OrderStatusView.routeName),

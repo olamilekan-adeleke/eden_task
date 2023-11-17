@@ -72,34 +72,22 @@ class LoginFormWidget extends StatelessWidget {
 
 extension on LoginFormWidget {
   Widget buildButtonWidget(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        buildSocialButton("google.png", "Login with Google", onTap: () {
-          final loginWithSocialBloc = getIt<LoginWithSocialBloc>();
-          loginWithSocialBloc.add(LoginWithGoogle());
-        }),
-        buildOrDividerOption(),
-        buildSocialButton("gitHub.png", "Login with GitHub", onTap: () {
-          final loginWithSocialBloc = getIt<LoginWithSocialBloc>();
-          loginWithSocialBloc.add(
-            LoginWithGithub(LoginWithGithubParam(context: context)),
-          );
-        }),
-      ],
-    );
+    return buildSocialButton("google.png", "Login with Google", onTap: () {
+      final loginWithSocialBloc = getIt<LoginWithSocialBloc>();
+      loginWithSocialBloc.add(LoginWithGoogle());
+    });
   }
 
-  Widget buildOrDividerOption() {
-    return Padding(
-      padding: symmetricPadding(vertical: 10),
-      child: Row(children: const [
-        Expanded(child: Divider(color: AppColor.dividerColor)),
-        TextWidget("    Or    ", size: kfsRegular),
-        Expanded(child: Divider(color: AppColor.dividerColor)),
-      ]),
-    );
-  }
+  // Widget buildOrDividerOption() {
+  //   return Padding(
+  //     padding: symmetricPadding(vertical: 10),
+  //     child: Row(children: const [
+  //       Expanded(child: Divider(color: AppColor.dividerColor)),
+  //       TextWidget("    Or    ", size: kfsRegular),
+  //       Expanded(child: Divider(color: AppColor.dividerColor)),
+  //     ]),
+  //   );
+  // }
 
   Widget buildSocialButton(String iconPath, String title,
       {VoidCallback? onTap}) {

@@ -1,16 +1,12 @@
-# eden_task
+# Eden task ReadMe
 
-A new Flutter project.
+Please read the steps below
 
-## Getting Started
+# How to set-up the Project
 
-This project is a starting point for a Flutter application.
+Create a .env file containing Ably Api Key like so.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+``` evn
+ABLY_API_KEY=tTWy2Q.1sp1J.....
+```
+After that, Everything should be ready to go.
