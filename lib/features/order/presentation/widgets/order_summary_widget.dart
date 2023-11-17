@@ -7,10 +7,13 @@ import '../../../../cores/constants/font_size.dart';
 import '../../../../cores/helper/space_helper.dart';
 import '../../../../cores/navigator/app_router.dart';
 
+import '../../domain/enums/order_status_enum.dart';
 import '../pages/order_status_view.dart';
 
 class OrderSummaryWidget extends StatelessWidget {
-  const OrderSummaryWidget({super.key});
+  final OrderStatus orderStatus;
+
+  const OrderSummaryWidget(this.orderStatus, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +21,14 @@ class OrderSummaryWidget extends StatelessWidget {
       verticalSpace(40),
       const TextWidget.bold("Your Orders", size: kfsLarge),
       verticalSpace(15),
-      const _OrderItemWidget(),
+      _OrderItemWidget(orderStatus),
     ]);
   }
 }
 
 class _OrderItemWidget extends StatelessWidget {
-  const _OrderItemWidget();
+  final OrderStatus orderStatus;
+  const _OrderItemWidget(this.orderStatus);
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +67,14 @@ class _OrderItemWidget extends StatelessWidget {
 
   Widget buildOrderStats() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const TextWidget.bold(
-        "Your order has been placed",
+      TextWidget.bold(
+        orderStatus.title,
         color: AppColor.warningColor,
         withOpacity: 0.7,
       ),
       verticalSpace(2),
-      const TextWidget.light(
-        "Your order is awaiting approval form vendor",
+      TextWidget.light(
+        orderStatus.description,
         size: kfsVeryTiny,
         withOpacity: 0.7,
       ),
@@ -80,9 +84,7 @@ class _OrderItemWidget extends StatelessWidget {
       SizedBox(height: h(20), child: const Placeholder()),
       verticalSpace(),
       GestureDetector(
-        onTap: () => AppRouter.instance.navigateTo(
-          OrderStatusView.routeName,
-        ),
+        onTap: () => AppRouter.instance.navigateTo(OrderStatusView.routeName),
         child: Container(
           padding: symmetricPadding(horizontal: 5, vertical: 5),
           alignment: Alignment.center,

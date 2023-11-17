@@ -10,7 +10,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  AppLocator.setup();
+  await AppLocator.setup();
   await ScreenUtil.ensureScreenSize();
 
   runApp(const EdenApp());

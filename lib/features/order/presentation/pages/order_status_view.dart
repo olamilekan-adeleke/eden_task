@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/app_locators.dart';
 import '../../../../cores/component/custom_scaffold_widget.dart';
 import '../../../../cores/component/custom_text_widget.dart';
 import '../../../../cores/constants/colors.dart';
 import '../../../../cores/constants/font_size.dart';
 import '../../../../cores/helper/space_helper.dart';
+import '../../domain/enums/order_status_enum.dart';
+import '../bloc/get_channel_messages/get_channel_messages_bloc.dart';
 
 class OrderStatusView extends StatelessWidget {
   static const String routeName = "order-status-view";
   const OrderStatusView({super.key});
 
+  static final _getChannelMessageBloc = getIt<GetChannelMessagesBloc>();
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      // useSingleScroll: false,
       appBar: AppBar(
         title: const TextWidget.bold("Order Timeline"),
         backgroundColor: AppColor.white,
@@ -29,43 +34,61 @@ class OrderStatusView extends StatelessWidget {
           height: 1.3,
         ),
         verticalSpace(20),
-        timelineWidget(
-          "Placed",
-          "Waiting for the vendor to accept your order.",
-          active: true,
-        ),
-        nextLineWidget(),
-        timelineWidget(
-          "Accepted",
-          "Waiting for the vendor to accept your order.",
-          active: true,
-        ),
-        nextLineWidget(),
-        timelineWidget(
-          "PICK UP IN PROGRESS",
-          "Waiting for the vendor to accept your order.",
-          current: true,
-        ),
-        nextLineWidget(),
-        timelineWidget(
-          "PICK UP IN PROGRESS",
-          "Waiting for the vendor to accept your order.",
-        ),
-        nextLineWidget(),
-        timelineWidget(
-          "PICK UP IN PROGRESS",
-          "Waiting for the vendor to accept your order.",
+        BlocBuilder<GetChannelMessagesBloc, GetChannelMessagesState>(
+          bloc: _getChannelMessageBloc,
+          builder: (context, state) {
+            OrderStatus orderStatus = OrderStatus.unknown;
+            if (state is GetChannelMessagesSuccess) {
+              orderStatus = state.data;
+            } else if (state is GetChannelMessagesError) {
+              orderStatus = OrderStatus.unknown;
+            }
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                timelineWidget(
+                  OrderStatus.orderPlaced,
+                  active: orderStatus.isGreater(OrderStatus.orderPlaced),
+                  current: orderStatus == OrderStatus.orderPlaced,
+                ),
+                nextLineWidget(),
+                timelineWidget(
+                  OrderStatus.orderAccepted,
+                  active: orderStatus.isGreater(OrderStatus.orderAccepted),
+                  current: orderStatus == OrderStatus.orderAccepted,
+                ),
+                nextLineWidget(),
+                timelineWidget(
+                  OrderStatus.orderPickUpInProgress,
+                  active:
+                      orderStatus.isGreater(OrderStatus.orderPickUpInProgress),
+                  current: orderStatus == OrderStatus.orderPickUpInProgress,
+                ),
+                nextLineWidget(),
+                timelineWidget(
+                  OrderStatus.orderOnTheWayToCustomer,
+                  active: orderStatus
+                      .isGreater(OrderStatus.orderOnTheWayToCustomer),
+                  current: orderStatus == OrderStatus.orderOnTheWayToCustomer,
+                ),
+                nextLineWidget(),
+                timelineWidget(
+                  OrderStatus.orderDelivered,
+                  active: orderStatus.isGreater(OrderStatus.orderDelivered),
+                  current: orderStatus == OrderStatus.orderDelivered,
+                ),
+              ],
+            );
+          },
         ),
       ]),
     );
   }
 
-  Widget timelineWidget(
-    String status,
-    String value, {
-    active = false,
-    current = false,
-  }) {
+  Widget timelineWidget(OrderStatus orderStatus,
+      {active = false, current = false}) {
     return Container(
       width: sw(100),
       padding: symmetricPadding(horizontal: 15, vertical: 15),
@@ -84,7 +107,7 @@ class OrderStatusView extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           TextWidget.bold(
-            "Order $status",
+            "Order ${orderStatus.title}",
             withOpacity: (active || current) ? 1 : 0.3,
           ),
           Icon(
@@ -103,14 +126,23 @@ class OrderStatusView extends StatelessWidget {
           ),
         ]),
         verticalSpace(3),
-        TextWidget.light(value, withOpacity: (active || current) ? 1 : 0.3),
-        verticalSpace(),
         Visibility(
           visible: (active || current),
-          child: TextWidget.light(
-            "Friday, May 30th 2023. 2:30 pm",
-            size: kfsVeryTiny,
-            withOpacity: (active || current) ? 1 : 0.5,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextWidget.light(
+                orderStatus.description,
+                withOpacity: (active || current) ? 1 : 0.3,
+                size: kfsVeryTiny,
+              ),
+              verticalSpace(),
+              TextWidget.light(
+                "Friday, May 30th 2023. 2:30 pm",
+                size: kfsVeryTiny,
+                withOpacity: (active || current) ? 0.7 : 0.5,
+              ),
+            ],
           ),
         ),
       ]),
