@@ -23,7 +23,7 @@ OrderStatus stringToOrderStatus(String value) {
     case 'order_delivered':
       return OrderStatus.orderDelivered;
     default:
-      return OrderStatus.unknown;
+      return OrderStatus.orderPlaced;
   }
 }
 

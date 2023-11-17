@@ -20,6 +20,7 @@ class GetChannelMessagesBloc
     on<GetChannelMessagesEvent>((event, emit) {});
 
     on<InitMessages>((event, emit) async {
+      emit(const GetChannelMessagesSuccess(OrderStatus.orderPlaced));
       emit(GetChannelMessagesLoading());
 
       final result = await getChannelsUsecase.call(_channelName);

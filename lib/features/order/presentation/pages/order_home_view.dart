@@ -39,7 +39,7 @@ class _OrderHomeViewState extends State<OrderHomeView> {
         BlocBuilder<GetChannelMessagesBloc, GetChannelMessagesState>(
           bloc: _getChannelMessageBloc,
           builder: (context, state) {
-            OrderStatus orderStatus = OrderStatus.unknown;
+            OrderStatus orderStatus = OrderStatus.orderPlaced;
             if (state is GetChannelMessagesSuccess) {
               orderStatus = state.data;
             } else if (state is GetChannelMessagesError) {
